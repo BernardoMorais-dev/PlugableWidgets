@@ -1,11 +1,15 @@
+
+
 .htl-wrapper {
     overflow-x: auto;
-    border: 1px solid #ddd;
-    background: white;
+    border: 2px solid #00ff40;
+    background: rgb(124, 213, 248);
     font-family: Arial;
 }
 
+
 .htl-header {
+    border: 2px solid #e5ff00;
     display: flex;
     margin-left: 140px;
     position: sticky;
@@ -15,6 +19,7 @@
 }
 
 .htl-cell {
+    border: 2px solid #ff02f2;
     min-width: 120px;
     border-left: 1px solid #eee;
     text-align: center;
@@ -23,9 +28,9 @@
 }
 
 .htl-body {
-    position: flex;
-    flex-direction: row;
-    min-width: 1600px;
+    display: flex;
+    flex-direction: column;
+    max-width: 1600px;
 }
 
 .htl-row {
@@ -34,10 +39,20 @@
     border-top: 1px solid #f1f1f1;
 }
 
+.htl-now-line{
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    overflow: hidden;
+    background: red;
+}
+
 .htl-header-ticks{
     position: absolute;
     left: 140px;
     top: 0;
+    background-color: #24276c;
+    border-radius: 20%;
     height: 100%;
     width:100%;
     display: flex;
@@ -46,6 +61,8 @@
 
 .htl-hour-tick{
     border: 2px solid #ce1313;
+    background-color: #020557;
+    border-radius: 20%;
     width: 120px;
     margin-inline: 10px;
 }

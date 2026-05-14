@@ -77,7 +77,7 @@ function NowLine({
     endHour,
     hourWidth,
     labelWidth,
-    totalHeight,
+    //totalHeight,
 }: {
     startHour: number;
     endHour: number;
@@ -107,7 +107,7 @@ function NowLine({
     return (
         <div
             className="htl-now-line"
-            style={{ left, height: totalHeight }}
+            style={{ left: left }}
             aria-hidden="true"
         >
             <div className="htl-now-dot" />
