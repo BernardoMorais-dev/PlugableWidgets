@@ -5,12 +5,13 @@
     border: 2px solid #00ff40;
     background: rgb(196, 198, 199);
     font-family: Arial;
+    /*max-height: 100vh;*/
 }
 /* Header Style */
 
 .htl-header {
     display: flex;
-    margin-left: 140px;
+   /*margin-left: 140px;*/
     height: 50px !important;
     position: sticky;
     top: 0;
@@ -66,6 +67,14 @@
     border-top: 1px solid #f1f1f1;
 }
 
+.htl-grid-line{
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    overflow: hidden;
+    background: rgb(61, 61, 61);
+}
+
 .htl-now-line{
     position: absolute;
     height: 100%;
@@ -96,6 +105,23 @@
     top: 0;
     height: 100%;
 }
+/* Tooltip Styles */
+.htl-tooltip {
+    position: relative;
+    display: inline-block;
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+
+/*----------------*/
+
 
 .htl-event {
     position: absolute;

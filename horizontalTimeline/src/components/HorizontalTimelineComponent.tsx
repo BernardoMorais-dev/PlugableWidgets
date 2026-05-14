@@ -103,7 +103,7 @@ function NowLine({
                 setLeft(null);
                 return;
             }
-            setLeft(((h - startHour) * hourWidth) + labelWidth);
+            setLeft(((h - startHour) * hourWidth));
         }
         update();
         const id = setInterval(update, 60_000);
@@ -299,7 +299,7 @@ export function HorizontalTimelineComponent({
                         className="htl-row"
                         style={{ top: rowIdx * rowHeight, height: rowHeight }}
                     >
-                        {/* Label */}
+                       {/* Label 
                         <div
                             className="htl-row-label"
                             style={{ width: LABEL_WIDTH, height: rowHeight }}
@@ -309,7 +309,7 @@ export function HorizontalTimelineComponent({
                                 {name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase()}
                             </span>
                             <span className="htl-row-name">{name.split(" ")[0]}</span>
-                        </div>
+                        </div>*/}
 
                         {/* Events layer */}
                         <div className="htl-events-layer" style={{ width: timelineWidth, height: rowHeight }}>
