@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendix.horizontaltimeline.HorizontalTimeline" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Horizontal Timeline</name>
+    <description>HorizontalTimeline for Events</description>
+    <icon/>
+<properties>
+
+        <propertyGroup caption="Data">
+            <property key="meetingList" type="datasource" isList="true" required="true">
+                <caption>Meetings datasource</caption>
+                <description>List of meetings to display</description>
+            </property>
+            <property key="attrCollaborator" type="attribute" dataSource="meetingList" required="true">
+                <caption>Collaborator name</caption>
+                <description>Name of the employee / collaborator</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="attrTitle" type="attribute" dataSource="meetingList" required="true">
+                <caption>Meeting title</caption>
+                <description>Title shown inside the event block</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="attrStart" type="attribute" dataSource="meetingList" required="true">
+                <caption>Start time</caption>
+                <description>DateTime — start of the meeting</description>
+                <attributeTypes>
+                    <attributeType name="DateTime"/>
+                </attributeTypes>
+            </property>
+            <property key="attrEnd" type="attribute" dataSource="meetingList" required="true">
+                <caption>End time</caption>
+                <description>DateTime — end of the meeting</description>
+                <attributeTypes>
+                    <attributeType name="DateTime"/>
+                </attributeTypes>
+            </property>
+            <property key="attrColor" type="attribute" dataSource="meetingList" required="false">
+                <caption>Color (optional)</caption>
+                <description>Hex color string, e.g. #3b82f6. Falls back to default palette if empty.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Display">
+            <property key="startHour" type="integer" defaultValue="8" required="true">
+                <caption>Start hour</caption>
+                <description>First hour shown on the timeline (0–23)</description>
+            </property>
+            <property key="endHour" type="integer" defaultValue="20" required="true">
+                <caption>End hour</caption>
+                <description>Last hour shown on the timeline (0–23)</description>
+            </property>
+            <property key="hourWidth" type="integer" defaultValue="120" required="true">
+                <caption>Hour width (px)</caption>
+                <description>Pixel width of each hour column</description>
+            </property>
+            <property key="rowHeight" type="integer" defaultValue="64" required="true">
+                <caption>Row height (px)</caption>
+                <description>Pixel height of each collaborator row</description>
+            </property>
+            <property key="showNowLine" type="boolean" defaultValue="true" required="true">
+                <caption>Show current time line</caption>
+                <description>Display a red line at the current time</description>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Events">
+            <property key="onEventClick" type="action" dataSource="meetingList" required="true">
+                <caption>On event click</caption>
+                <description>Action triggered when the user clicks a meeting block</description>
+            </property>
+        </propertyGroup>
+
+    </properties>
+</widget>
+

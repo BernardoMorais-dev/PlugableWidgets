@@ -1,0 +1,85 @@
+.htl-wrapper {
+    overflow-x: auto;
+    border: 1px solid #ddd;
+    background: white;
+    font-family: Arial;
+}
+
+.htl-header {
+    display: flex;
+    margin-left: 140px;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 5;
+}
+
+.htl-cell {
+    min-width: 120px;
+    border-left: 1px solid #eee;
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.htl-body {
+    position: flex;
+    flex-direction: row;
+    min-width: 1600px;
+}
+
+.htl-row {
+    position: relative;
+    height: 70px;
+    border-top: 1px solid #f1f1f1;
+}
+
+.htl-header-ticks{
+    position: absolute;
+    left: 140px;
+    top: 0;
+    height: 100%;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.htl-hour-tick{
+    border: 2px solid #ce1313;
+    width: 120px;
+    margin-inline: 10px;
+}
+
+.employee-name {
+    position: absolute;
+    width: 140px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: bold;
+    background: #fafafa;
+    border-right: 1px solid #ddd;
+}
+
+.htl-events-layer {
+    position: absolute;
+    left: 140px;
+    top: 0;
+    height: 100%;
+}
+
+.htl-event {
+    position: absolute;
+    top: 12px;
+    height: 45px;
+    background: #110e5a;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+}
