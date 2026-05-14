@@ -58,7 +58,15 @@ function getLeftPx(date: Date, startHour: number, hourWidth: number): number {
 function getWidthPx(start: Date, end: Date, hourWidth: number): number {
     return ((dateToMinutes(end) - dateToMinutes(start)) / 60) * hourWidth;
 }
-
+/*
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}*/
 function hexToRgba(hex: string, alpha: number): string {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -245,9 +253,6 @@ export function HorizontalTimelineComponent({
 
             {/* ── Sticky header ── */}
             <div className="htl-header" style={{ height: HEADER_HEIGHT }}>
-                {/* Label column spacer */}
-                <div className="htl-header-spacer" style={{ width: LABEL_WIDTH, minWidth: LABEL_WIDTH }} />
-
                 {/* Hour ticks */}
                 <div className="htl-header-ticks" style={{ width: timelineWidth }}>
                     {hourTicks.map(h => (
