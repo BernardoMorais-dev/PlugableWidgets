@@ -268,7 +268,7 @@ export function HorizontalTimelineComponent({
                         <div
                             key={h}
                             className="htl-hour-tick"
-                            style={{ left: (h - startHour) * hourWidth }}
+                            style={{ width: hourWidth, left: (h - startHour) * hourWidth }}
                         >
                         {/* Grid lines */}
                         <div

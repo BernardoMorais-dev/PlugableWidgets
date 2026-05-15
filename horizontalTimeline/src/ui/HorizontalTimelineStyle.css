@@ -24,7 +24,6 @@
     background-color: #50a2ee;
     border-radius: 10%;
     height: 100%;
-    width:100%;
     color: white;
     display: flex;
     flex-direction: row;
@@ -39,7 +38,6 @@
     font-weight: bold;
     border:2px solid #110e5ac5;
     background-color: #2f93f1;
-    width: 120px;
     padding: 10px 10px 10px 10px ;
 }
 
@@ -100,7 +98,6 @@
 
 .htl-events-layer {
     position: absolute;
-    left: 140px;
     top: 0;
     height: 100%;
 }
