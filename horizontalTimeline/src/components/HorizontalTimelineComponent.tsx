@@ -194,7 +194,7 @@ function Tooltip({ state }: { state: TooltipState }): ReactElement | null {
     return (
         <div
             className="htl-tooltip"
-            style={{ left: state.x + 14, top: state.y - 10 }}
+            style={{ left: state.x, top: state.y}}
             role="tooltip"
         >
             <div className="htl-tooltip-title">{ev.title}</div>
@@ -226,7 +226,7 @@ export function HorizontalTimelineComponent({
     onEventClick,
 }: HorizontalTimelineProps): ReactElement {
     const LABEL_WIDTH = 104;
-    const HEADER_HEIGHT = 36;
+    const HEADER_HEIGHT = 50;
     const totalHours = endHour - startHour;
     const timelineWidth = totalHours * hourWidth;
 
@@ -253,35 +253,6 @@ export function HorizontalTimelineComponent({
 
             {/* ── Sticky header ── */}
             <div className="htl-header" style={{ height: HEADER_HEIGHT }}>
-                {/* Hour ticks */}
-                <div className="htl-header-ticks" style={{ width: timelineWidth }}>
-                    {hourTicks.map(h => (
-                        <div
-                            key={h}
-                            className="htl-hour-tick"
-                            style={{ left: (h - startHour) * hourWidth }}
-                        >
-                            {String(h).padStart(2, "0")}:00
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* ── Body ── */}
-            <div className="htl-body" style={{ height: totalBodyHeight }}>
-
-                {/* Grid lines */}
-                <div className="htl-grid" style={{ left: LABEL_WIDTH, width: timelineWidth, height: totalBodyHeight }}>
-                    {hourTicks.map(h => (
-                        <div
-                            key={h}
-                            className="htl-grid-line"
-                            style={{ left: (h - startHour) * hourWidth }}
-                        />
-                    ))}
-                </div>
-
-                {/* Now line */}
                 {showNowLine && (
                     <NowLine
                         startHour={startHour}
@@ -291,6 +262,42 @@ export function HorizontalTimelineComponent({
                         totalHeight={totalBodyHeight}
                     />
                 )}
+                {/* Hour ticks */}
+                <div className="htl-header-ticks" style={{ width: timelineWidth }}>
+                    {hourTicks.map(h => (
+                        <div
+                            key={h}
+                            className="htl-hour-tick"
+                            style={{ left: (h - startHour) * hourWidth }}
+                        >
+                        {/* Grid lines */}
+                        <div
+                            key={h}
+                            className="htl-grid-line"
+                            style={{ left: (h - startHour) * hourWidth , top: HEADER_HEIGHT}}
+                        />
+                            {String(h).padStart(2, "0")}:00
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* ── Body ── */}
+            <div className="htl-body" style={{ height: totalBodyHeight }}>
+                
+                
+                {/*<div className="htl-grid" style={{ left: LABEL_WIDTH, width: timelineWidth, height: totalBodyHeight }}>
+                    {hourTicks.map(h => (
+                        <div
+                            key={h}
+                            className="htl-grid-line"
+                            style={{ left: (h - startHour) * hourWidth }}
+                        />
+                    ))}
+                </div>*/}
+
+                {/* Now line */}
+                
 
                 {/* Collaborator rows */}
                 {collaborators.map((name, rowIdx) => (
