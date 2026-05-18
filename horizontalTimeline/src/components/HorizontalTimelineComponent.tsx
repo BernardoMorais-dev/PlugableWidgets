@@ -85,13 +85,15 @@ function NowLine({
     endHour,
     hourWidth,
     labelWidth,
-    //totalHeight,
+    totalHeight,
+    topMargin,
 }: {
     startHour: number;
     endHour: number;
     hourWidth: number;
     labelWidth: number;
     totalHeight: number;
+    topMargin: number;
 }): ReactElement | null {
     const [left, setLeft] = useState<number | null>(null);
 
@@ -115,7 +117,7 @@ function NowLine({
     return (
         <div
             className="htl-now-line"
-            style={{ left: left }}
+            style={{ left: left , height: totalHeight, top: topMargin}}
             aria-hidden="true"
         >
             <div className="htl-now-dot" />
@@ -194,7 +196,7 @@ function Tooltip({ state }: { state: TooltipState }): ReactElement | null {
     return (
         <div
             className="htl-tooltip"
-            style={{ left: state.x, top: state.y}}
+            style={{ left: state.x + 12, top: state.y+ 12}}
             role="tooltip"
         >
             <div className="htl-tooltip-title">{ev.title}</div>
@@ -260,10 +262,11 @@ export function HorizontalTimelineComponent({
                         hourWidth={hourWidth}
                         labelWidth={LABEL_WIDTH}
                         totalHeight={totalBodyHeight}
+                        topMargin={HEADER_HEIGHT}
                     />
                 )}
                 {/* Hour ticks */}
-                <div className="htl-header-ticks" style={{ width: timelineWidth }}>
+                <div className="htl-header-ticks" >
                     {hourTicks.map(h => (
                         <div
                             key={h}
@@ -274,7 +277,7 @@ export function HorizontalTimelineComponent({
                         <div
                             key={h}
                             className="htl-grid-line"
-                            style={{ left: (h - startHour) * hourWidth , top: HEADER_HEIGHT}}
+                            style={{ left: (h - startHour) * hourWidth , height: totalBodyHeight, top: HEADER_HEIGHT}}
                         />
                             {String(h).padStart(2, "0")}:00
                         </div>
