@@ -2,7 +2,6 @@
 
 .htl-wrapper {
     overflow-x: auto;
-    border: 2px solid #00ff40;
     background: rgba(196, 198, 199, 0.616);
     font-family: Arial;
 }
@@ -10,7 +9,6 @@
 
 .htl-header {
     display: flex;
-   /*margin-left: 140px;*/
     position: sticky;
     top: 0;
     z-index: 10;
@@ -45,7 +43,6 @@
 
 /*-------*/
 .htl-cell {
-    border: 2px solid #ff02f2;
     min-width: 120px;
     border-left: 1px solid #eee;
     text-align: center;
@@ -126,7 +123,7 @@
 
 /*----------------*/
 
-
+/*---Event Style----*/
 .htl-event {
     position: absolute;
     top: 12px;
@@ -137,7 +134,12 @@
     border: 1px solid #2f00ff;
     border-radius: 8px;
     padding: 10px;
-    font-size: 13px;
     overflow: hidden;
     white-space: nowrap;
 }
+
+.htl-event-title, .htl-event-time{
+    font-size: 20px;
+    font-weight: bold;
+}
+/*------------------*/

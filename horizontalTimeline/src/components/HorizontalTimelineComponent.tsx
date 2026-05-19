@@ -177,7 +177,7 @@ function EventBlock({
         >
             {!tooNarrow && (
                 <>
-                    <span className="htl-event-title">{event.title}</span>
+                    <span className="htl-event-title">{event.title} </span>
                     <span className="htl-event-time">{fmt(event.start)}–{fmt(event.end)}</span>
                 </>
             )}
@@ -201,17 +201,17 @@ function Tooltip({ state }: { state: TooltipState }): ReactElement | null {
         >
             <div className="htl-tooltip-title">{ev.title}</div>
             <div className="htl-tooltip-row">
-                <span className="htl-tooltip-label">Horário</span>
+                <span className="htl-tooltip-label">Hours: </span>
                 {fmt(ev.start)} – {fmt(ev.end)}
             </div>
             <div className="htl-tooltip-row">
-                <span className="htl-tooltip-label">Duração</span>
+                <span className="htl-tooltip-label">Duration: </span>
                 {durationLabel}
             </div>
-            <div className="htl-tooltip-row">
+            {/*<div className="htl-tooltip-row">
                 <span className="htl-tooltip-label">Colaborador</span>
                 {ev.collaborator}
-            </div>
+            </div>*/}
         </div>
     );
 }
