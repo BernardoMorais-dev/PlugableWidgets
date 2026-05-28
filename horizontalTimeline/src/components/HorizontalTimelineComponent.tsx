@@ -251,7 +251,7 @@ export function HorizontalTimelineComponent({
     const hourTicks = Array.from({ length: totalHours + 1 }, (_, i) => startHour + i);
 
     return (
-        <div className="htl-wrapper" ref={wrapperRef}>
+        <div className="htl-wrapper" ref={wrapperRef} style={{ width:totalHours * hourWidth }}>
 
             {/* ── Sticky header ── */}
             <div className="htl-header" style={{ height: HEADER_HEIGHT }}>
@@ -309,17 +309,6 @@ export function HorizontalTimelineComponent({
                         className="htl-row"
                         style={{ top: rowIdx * rowHeight, height: rowHeight }}
                     >
-                       {/* Label 
-                        <div
-                            className="htl-row-label"
-                            style={{ width: LABEL_WIDTH, height: rowHeight }}
-                            title={name}
-                        >
-                            <span className="htl-row-avatar">
-                                {name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase()}
-                            </span>
-                            <span className="htl-row-name">{name.split(" ")[0]}</span>
-                        </div>*/}
 
                         {/* Events layer */}
                         <div className="htl-events-layer" style={{ width: timelineWidth, height: rowHeight }}>

@@ -4,13 +4,17 @@
  * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
-import { ListValue, ListActionValue, ListAttributeValue } from "mendix";
+import { DynamicValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
+
+export type ViewModeEnum = "dayView" | "monthView";
 
 export interface HorizontalTimelineContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    viewMode: ViewModeEnum;
+    monthContext?: DynamicValue<Date>;
     meetingList: ListValue;
     attrCollaborator: ListAttributeValue<string>;
     attrTitle: ListAttributeValue<string>;
@@ -20,6 +24,7 @@ export interface HorizontalTimelineContainerProps {
     startHour: number;
     endHour: number;
     hourWidth: number;
+    headerHeight: number;
     rowHeight: number;
     showNowLine: boolean;
     onEventClick?: ListActionValue;
@@ -36,6 +41,8 @@ export interface HorizontalTimelinePreviewProps {
     readOnly: boolean;
     renderMode: "design" | "xray" | "structure";
     translate: (text: string) => string;
+    viewMode: ViewModeEnum;
+    monthContext: string;
     meetingList: {} | { caption: string } | { type: string } | null;
     attrCollaborator: string;
     attrTitle: string;
@@ -45,6 +52,7 @@ export interface HorizontalTimelinePreviewProps {
     startHour: number | null;
     endHour: number | null;
     hourWidth: number | null;
+    headerHeight: number | null;
     rowHeight: number | null;
     showNowLine: boolean;
     onEventClick: {} | null;
