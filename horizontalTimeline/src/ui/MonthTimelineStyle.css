@@ -1,21 +1,28 @@
 .mtl-wrapper{
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     overflow-x: auto;
-    background: rgba(196, 198, 199, 0.616);
+    background: #eff6ff;
     font-family: Arial;
+    max-height: 50vh;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+
 }
 
 /*Header Style*/
 .mtl-header{
     display: flex;
     flex-direction: row;
+    position: sticky;
     padding: 5px 5px 5px 5px;
     width:100%;
     flex:1;
     top: 0;
     z-index:10;
-    border: 2px solid #000;
+    background-color: #eff6ff;
 
 }
 
@@ -23,49 +30,77 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 10px 10px 10px 10px;
-
-    border-left: 1px solid #fff;
-    border-right: 1px solid #fff;
     z-index: 5;
     .mtl-day-content{
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #eff6ff;
+        background-color: #c3ddff;
         font-size: medium;
         font-weight: bold;
         color: #1e40af;
+        padding: 5px 5px 5px 5px;
         border-radius: 100%;
     }
 }
+
+
+.mtl-curr-day-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e40af;
+    font-size: medium;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 5px 5px 5px 5px;
+    border-radius: 100%;
+}
+
 
 /*Events Style*/
 
 .mtl-body{
     margin-top: 6px;
+    padding: 5px 5px 5px 5px;
     display: flex;
     flex-direction: row;
+}
+
+.mtl-curr-day-event{
+    display: flex;
+    flex-direction: column;
+    background-color: #1e40af49;
+    border-left: 1px solid #eff6ff;
+    border-right: 1px solid #eff6ff;
 }
 
 .mtl-day-event{
     display: flex;
     flex-direction: column;
+    border-left: 1px solid #1e40af;
+    border-right: 1px solid #1e40af;
 }
 
 .mtl-event{
-    display: flex;
     text-wrap: wrap;
-    flex-direction: row;
-    margin-top: 2px;
-    margin-bottom: 2px;
+    margin: 5px 5px 5px 5px;
     top: 0;
     padding: 5px 5px 5px 5px;
+    border-radius: 20%; 
     background-color: #ab01fa9f;
-    border: 1px dashed #7c00b6;
+    border: 2px dashed #7c00b6;
+    z-index: 5;
 }
 
 .mtl-event-title{
     font-weight: bold;
 }
+/*
+.mtl-grid-line{
+    width: 1px;
+    background-color: #1e40af;
+    height: 100%;
+    z-index:4;
+}*/
