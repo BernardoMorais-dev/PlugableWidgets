@@ -11,26 +11,22 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
     const {
         viewMode,
         meetingList,
-        attrCollaborator,
         attrTitle,
         attrStart,
         attrEnd,
-        monthContext,
+        dateContext,
         attrColor,
         startHour,
         endHour,
-        hourWidth,
-        headerHeight,
         rowHeight,
         showNowLine,
         onEventClick,
     } = props;
     
-    const monthDate: Date | undefined= monthContext?.value;
+    const monthDate: Date | undefined= dateContext?.value;
     // Map Mendix ObjectItems → plain objects the timeline component can use
     const events: MappedEvent[] = (meetingList.items ?? []).map((item: ObjectItem) => ({
         item,
-        collaborator: attrCollaborator.get(item).value ?? "",
         title: attrTitle.get(item).value ?? "",
         start: attrStart.get(item).value as Date,
         end: attrEnd.get(item).value as Date,
@@ -41,9 +37,9 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
         return (
             <HorizontalTimelineComponent
                 events={events}
+                dateContext={dateContext?.value ??new Date()}
                 startHour={startHour ?? 8}
                 endHour={endHour ?? 20}
-                hourWidth={hourWidth ?? 120}
                 rowHeight={rowHeight ?? 64}
 
                 showNowLine={showNowLine ?? true}
@@ -57,9 +53,7 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
     }
     return (
             <MonthTimeline
-                dayWidth={hourWidth ?? 120}
                 monthContext={monthDate?? new Date()}
-                headerHeight={headerHeight??50}
                 events={events}
             />
         );

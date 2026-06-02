@@ -18,9 +18,9 @@
                 </enumerationValues>
             </property>
 
-            <property key="monthContext" type="expression" required="false" defaultValue="">
-                <caption>Month Context</caption>
-                <description>Month Date to display on the timeline</description>
+            <property key="dateContext" type="expression" required="false" defaultValue="">
+                <caption>Date Context</caption>
+                <description>Date context to display on the timeline</description>
                 <returnType type="DateTime"/>
             </property>
             
@@ -29,13 +29,6 @@
                 <description>List of events to display</description>  
             </property>
 
-            <property key="attrCollaborator" type="attribute" dataSource="meetingList" required="true">
-                <caption>Event group</caption>
-                <description>Name of the event group</description>
-                <attributeTypes>
-                    <attributeType name="String"/>
-                </attributeTypes>
-            </property>
             <property key="attrTitle" type="attribute" dataSource="meetingList" required="true">
                 <caption>Event title</caption>
                 <description>Title shown inside the event block</description>
@@ -75,15 +68,7 @@
                 <caption>End hour</caption>
                 <description>Last hour shown on the timeline (0–23)</description>
             </property>
-            <property key="hourWidth" type="integer" defaultValue="120" required="true">
-                <caption>Hour width (px)</caption>
-                <description>Pixel width of each hour column</description>
-            </property>
             
-            <property key="headerHeight" type="integer" defaultValue="50" required="true">
-                <caption>Header height (px)</caption>
-                <description>Pixel height of header Row</description>
-            </property>
             <property key="rowHeight" type="integer" defaultValue="64" required="true">
                 <caption>Row height (px)</caption>
                 <description>Pixel height of each collaborator row</description>

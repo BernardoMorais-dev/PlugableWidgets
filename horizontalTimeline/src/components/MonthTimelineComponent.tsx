@@ -3,7 +3,6 @@ import {  ReactElement, useEffect, useRef, useState} from "react";
 
 export interface MappedEvent{
     item: ObjectItem;
-    collaborator: string;
     title: string;
     start: Date;
     end: Date;
@@ -13,8 +12,6 @@ export interface MappedEvent{
 export interface HorizontalTimelimeProps{
     events: MappedEvent[];
     monthContext: Date;
-    dayWidth: number;
-    headerHeight:number;
 }
 
 //-----Helper functions ----------------
@@ -25,14 +22,22 @@ function daysInMonth(date:Date): number{
     return (new Date(year, month+1, 0)).getDate();
 }
 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color + '85';
+}
+
+const randColor= getRandomColor();
 
 //-------------------------------------
 
 
 export function MonthTimeline({
     monthContext,
-    dayWidth,
-    headerHeight,
     events
 }:HorizontalTimelimeProps): ReactElement{
     const [wrapperWidth, setWrapperWidth] = useState(0);
@@ -55,24 +60,26 @@ export function MonthTimeline({
     }, []);
 
     const calcDayWidth= wrapperWidth > 0 ? wrapperWidth/daysNum : 0;
+    const calcFontSize = Math.max(8, calcDayWidth * 0.3);
+
     return (
     <div className="mtl-wrapper" ref={wrapperRef} >
-        <div className="mtl-header" style={{width: "100%", height: headerHeight}}>
+        <div className="mtl-header" style={{width: "100%", height: calcDayWidth}}>
             {dayArray.map(d =>(
                 <div  
                     key={d}
                     className="mtl-day"
-                    style = {{left: d * dayWidth, width:calcDayWidth}}>
+                    style = {{ width:calcDayWidth}}>
                         {currDay === d  && currMonth === monthContext.getMonth() && currYear === monthContext.getFullYear()? (
                            <div
                             className="mtl-curr-day-content" 
-                            style={{height: headerHeight, width: headerHeight}}>
+                            style={{height: calcDayWidth, width: calcDayWidth}}>
                             {String(d).padStart(2, "0")}/{String(monthContext.getMonth() + 1).padStart(2, "0")}        
                         </div> 
                         ) : (
                             <div
                             className="mtl-day-content" 
-                            style={{height: headerHeight, width: headerHeight}}>
+                            style={{height: calcDayWidth, width: calcDayWidth}}>
                             {String(d).padStart(2, "0")}/{String(monthContext.getMonth() + 1).padStart(2, "0")}        
                         </div>
                         )}
@@ -87,7 +94,7 @@ export function MonthTimeline({
                 <div  
                     key={d}
                     className={d === currDay && currMonth === monthContext.getMonth() && currYear === monthContext.getFullYear()? "mtl-curr-day-event":"mtl-day-event"}
-                    style = {{left: d * dayWidth, width:calcDayWidth}}>
+                    style = {{ width:calcDayWidth}}>
 
                         
                         {/*<div className= "mtl-grid-line" style={{left: d * calcDayWidth}}/>*/}
@@ -95,15 +102,14 @@ export function MonthTimeline({
                         {events.filter(ev=> ev.start.getDate() === d && ev.start.getMonth() === monthContext.getMonth() && ev.start.getFullYear() === monthContext.getFullYear())
                         .map((ev)=>{
                             return(
-                            <div  className="mtl-event" style={{left: calcDayWidth * d}}>
-                                <span className="mtl-event-title">{ev.title}</span> 
+                            <div className="mtl-event" style={{width: ev.end.getDate() - ev.start.getDate() > 0 ? ((ev.end.getDate() - ev.start.getDate()) * calcDayWidth):(calcDayWidth), background: ev.color != null && ev.color != "" &&  ev.color!= undefined ? ev.color :randColor}}>
+                                <span className="mtl-event-title" style={{fontSize: calcFontSize}}>{ev.title}</span>
                             </div>
                             );
                         })}        
                 </div>
 
-            ) 
-            )}
+            ))}
             
 
         </div>

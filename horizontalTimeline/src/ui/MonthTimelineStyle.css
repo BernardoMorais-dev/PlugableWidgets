@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    overflow-x: auto;
+    overflow-x: hidden;
     background: #eff6ff;
     font-family: Arial;
     max-height: 50vh;
@@ -37,7 +37,6 @@
         align-items: center;
         justify-content: center;
         background-color: #c3ddff;
-        font-size: medium;
         font-weight: bold;
         color: #1e40af;
         padding: 5px 5px 5px 5px;
@@ -85,11 +84,10 @@
 
 .mtl-event{
     text-wrap: wrap;
-    margin: 5px 5px 5px 5px;
     top: 0;
     padding: 5px 5px 5px 5px;
-    border-radius: 20%; 
-    background-color: #ab01fa9f;
+    border-radius: 15px; 
+    margin-bottom: 5px;
     border: 2px dashed #7c00b6;
     z-index: 5;
 }
