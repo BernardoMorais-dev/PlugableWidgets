@@ -17,13 +17,12 @@
     display: flex;
     flex-direction: row;
     position: sticky;
-    padding: 5px 5px 5px 5px;
+    height: 30px;
     width:100%;
     flex:1;
     top: 0;
     z-index:10;
     background-color: #eff6ff;
-
 }
 
 .mtl-day{
@@ -32,25 +31,24 @@
     justify-content: center;
     padding: 10px 10px 10px 10px;
     z-index: 5;
-    .mtl-day-content{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #c3ddff;
-        font-weight: bold;
-        color: #1e40af;
-        padding: 5px 5px 5px 5px;
-        border-radius: 100%;
-    }
 }
 
+.mtl-day-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c3ddff;
+    font-weight: bold;
+    color: #1e40af;
+    padding: 5px 5px 5px 5px;
+    border-radius: 25px;
+}
 
 .mtl-curr-day-content{
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #1e40af;
-    font-size: medium;
     font-weight: bold;
     color: #ffffff;
     padding: 5px 5px 5px 5px;

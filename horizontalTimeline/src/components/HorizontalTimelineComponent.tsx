@@ -20,14 +20,14 @@ interface HorizontalTimelineProps {
     showNowLine: boolean;
     onEventClick?: (item: ObjectItem) => void;
 }
-/*
+
 interface TooltipState {
     visible: boolean;
     x: number;
     y: number;
     event: MappedEvent | null;
 }
-*/
+
 // ─── Colour palette (cycles when no color attribute is set) ───────────────────
 
 function getRandomColor() {
@@ -50,23 +50,23 @@ function dateToMinutes(date: Date): number {
 function fmt(date: Date): string {
     return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
 }
-/*
-function getLeftPx(date: Date, startHour: number, calcHourWidth: number): number {
-    return ((dateToMinutes(date) - startHour * 60) / 60) * calcHourWidth;
+
+
+function getWidthPx(endHour: number, start: Date, end: Date, calcHourWidth: number): number {
+    let width= end.getDate() > start.getDate() ? 
+    (((endHour * 60 - dateToMinutes(start)) / 60) * calcHourWidth)
+    :(((dateToMinutes(end) - dateToMinutes(start)) / 60) * calcHourWidth)
+    return width;
 }
 
-function hexToRgba(hex: string, alpha: number): string {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r},${g},${b},${alpha})`;
-}
-*/
-
-function getWidthPx(start: Date, end: Date, calcHourWidth: number): number {
-    return ((dateToMinutes(end) - dateToMinutes(start)) / 60) * calcHourWidth;
-}
-
+function getEventLayerHeight(hours: number[], events : MappedEvent[]): number{
+    let height=0;
+    for(const h of hours){
+        let newHeight= events.filter(ev => ev.start.getHours() === h).length * 50; 
+        height=newHeight>height ? (newHeight):(height)
+    }
+    return height;
+} 
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -111,68 +111,6 @@ function NowLine({
     );
 }
 
-/*function EventBlock({
-    event,
-    left,
-    width,
-    top,
-    bottom,
-    fontSize,
-    paletteEntry,
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
-    onMouseMove,
-}: {
-    event: MappedEvent;
-    left: number;
-    width: number;
-    top: number;
-    fontSize: number;
-    bottom: number;
-    paletteEntry: string;
-    onClick?: () => void;
-    onMouseEnter?: (e: React.MouseEvent) => void;
-    onMouseLeave?: () => void;
-    onMouseMove?: (e: React.MouseEvent) => void;
-}): ReactElement {
-    const bg = event.color ? hexToRgba(event.color, 0.15) : paletteEntry;
-    const border = event.color ?? paletteEntry;
-    const textColor = event.color ?? paletteEntry;
-
-    const tooNarrow = width < 56;
-
-    return (
-        <div
-            className={`htl-event${onClick ? " htl-event--clickable" : ""}`}
-            style={{
-                left,
-                width: Math.max(width - 4, 8),
-                top,
-                bottom,
-                background: bg,
-                borderLeftColor: border,
-                color: textColor,
-            }}
-            onClick={onClick}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onMouseMove={onMouseMove}
-            role={onClick ? "button" : undefined}
-            tabIndex={onClick ? 0 : undefined}
-            onKeyDown={onClick ? (e) => e.key === "Enter" && onClick() : undefined}
-            aria-label={`${event.title} ${fmt(event.start)}–${fmt(event.end)}`}
-        >
-            {!tooNarrow && (
-                <>
-                    <span className="htl-event-title" style={{fontSize: fontSize}}>{event.title} </span>
-                    <span className="htl-event-time" style={{fontSize: fontSize}}>{fmt(event.start)}–{fmt(event.end)}</span>
-                </>
-            )}
-        </div>
-    );
-}
-
 function Tooltip({ state }: { state: TooltipState }): ReactElement | null {
     if (!state.visible || !state.event) return null;
     const ev = state.event;
@@ -196,14 +134,9 @@ function Tooltip({ state }: { state: TooltipState }): ReactElement | null {
                 <span className="htl-tooltip-label">Duration: </span>
                 {durationLabel}
             </div>
-            {/*<div className="htl-tooltip-row">
-                <span className="htl-tooltip-label">Colaborador</span>
-                {ev.collaborator}
-            </div>
         </div>
     );
 }
-*/
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function HorizontalTimelineComponent({
@@ -212,7 +145,7 @@ export function HorizontalTimelineComponent({
     startHour,
     endHour,
     showNowLine,
-    //onEventClick,
+    onEventClick,
 }: HorizontalTimelineProps): ReactElement {
 
     const totalHours = endHour - startHour;
@@ -230,21 +163,21 @@ export function HorizontalTimelineComponent({
     }, []);
 
     const calcHourWidth= wrapperWidth > 0 ? wrapperWidth/(endHour-startHour) : 0;
-    const calcFontSize = Math.max(8, calcHourWidth * 0.3);
+    const calcFontSize = Math.min(15, calcHourWidth * 0.3);
+    
 
-
-    /*const [tooltip, setTooltip] = useState<TooltipState>({
+    const [tooltip, setTooltip] = useState<TooltipState>({
         visible: false,
         x: 0,
         y: 0,
         event: null,
-    });*/
+    });
 
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     // Build hour ticks array
     const hourTicks = Array.from({ length: totalHours + 1 }, (_, i) => startHour + i);
-
+    const eventsHeight = getEventLayerHeight(hourTicks, events);
     return (
         <div className="htl-wrapper" ref={wrapperRef}>
 
@@ -257,7 +190,7 @@ export function HorizontalTimelineComponent({
                             <div
                                 key={h}
                                 className="htl-hour-tick"
-                            >
+                                style={{width: Math.min(35, calcHourWidth), height: Math.min(35, calcHourWidth)}}>
                                 {String(h).padStart(2, "0")}:00
                             </div>
                         </div>
@@ -273,57 +206,54 @@ export function HorizontalTimelineComponent({
                         calcHourWidth={calcHourWidth}
                     />
                 )}
-                {/* Events layer */}
-                    {hourTicks.map(h => (
-                        <div 
-                            key = {h}
-                            className="htl-event-layer"
-                            style={{width: calcHourWidth}}>
-                            {events.filter(ev => ev.start.getHours() === h && 
-                            ev.start.getDate() === dateContext.getDate() && 
-                            ev.start.getMonth() === dateContext.getMonth() && 
-                            ev.start.getFullYear() === dateContext.getFullYear())
-                                .map((ev)=> {
-                                    const width = getWidthPx(ev.start, ev.end, calcHourWidth);
-                        
-                        return (
-                            <div className ="htl-event"style={{width: width, background: randColor}}>
-                                <span className=".htl-event-title" style={{fontSize: calcFontSize}}>
-                                    {ev.title}
-                                </span>
-                                <br/>
-                                <span className=".htl-event-time" style={{fontSize: calcFontSize}}>
-                                    {fmt(ev.start)}–{fmt(ev.end)}
-                                </span>
-                            </div>
-                            /*<EventBlock
-                            key={`ev.item.id`}
-                            event={ev}
-                            left={left}
-                            width={width}
-                            top={6}
-                            fontSize={calcFontSize}
-                            bottom={6}
-                            paletteEntry={randColor}
-                            onClick={onEventClick ? () => onEventClick(ev.item) : undefined}
-                            onMouseEnter={(e) =>
-                                setTooltip({ visible: true, x: e.clientX, y: e.clientY, event: ev })
-                            }
-                            onMouseMove={(e) =>
-                                setTooltip(prev => ({ ...prev, x: e.clientX, y: e.clientY }))
-                            }
-                            onMouseLeave={() =>
-                                setTooltip(prev => ({ ...prev, visible: false }))
-                            }
-                            />*/
-                            );
-                            })}
-                        </div>
-                    ))}
-                </div>
 
-            {/* Tooltip — rendered outside scroll so it doesn't clip */}
-            {/*<Tooltip state={tooltip} />*/}
+                {hourTicks.map(h => {
+                let topMargin = h % 2 ===0 ? 50: 0; 
+                return (
+                    <div
+                        key={h}
+                        className="htl-event-layer"
+                        style={{ width: calcHourWidth , height: eventsHeight}}
+                    >
+                        {events
+                            .filter(ev =>
+                                ev.start.getHours() === h &&
+                                ev.start.getDate() === dateContext.getDate() &&
+                                ev.start.getMonth() === dateContext.getMonth() &&
+                                ev.start.getFullYear() === dateContext.getFullYear()
+                            )
+                            
+                            .map(ev => {
+                                const width = getWidthPx(endHour, ev.start, ev.end, calcHourWidth);
+                                const currTopMargin = topMargin;
+                                
+                                topMargin += 50; 
+
+                                return (
+                                    <div
+                                        className="htl-event"
+                                        key={ev.item.id}
+                                        style={{
+                                            width,
+                                            top: currTopMargin,       
+                                            background: ev.color ?? randColor,
+                                        }}
+                                        onClick={() => onEventClick?.(ev.item)}
+                                        onMouseEnter={e => setTooltip({ visible: true, x: e.clientX, y: e.clientY, event: ev })}
+                                        onMouseMove={e => setTooltip(prev => ({ ...prev, x: e.clientX, y: e.clientY }))}
+                                        onMouseLeave={() => setTooltip(prev => ({ ...prev, visible: false }))}
+                                    >
+                                        <span className="htl-event-title" style={{ fontSize: calcFontSize }}>{ev.title}</span>
+                                        <span className="htl-event-time" style={{ fontSize: calcFontSize }}>{fmt(ev.start)}–{fmt(ev.end)}</span>
+                                        <Tooltip state={tooltip} />
+                                    </div>
+                                );
+                            })}
+                    </div>
+                );
+            })}
+    
+                </div>
         </div>
     );
 }

@@ -41,7 +41,7 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
                 startHour={startHour ?? 8}
                 endHour={endHour ?? 20}
                 rowHeight={rowHeight ?? 64}
-
+                
                 showNowLine={showNowLine ?? true}
                 onEventClick={
                     onEventClick

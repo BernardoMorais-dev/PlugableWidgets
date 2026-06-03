@@ -60,7 +60,7 @@ export function MonthTimeline({
     }, []);
 
     const calcDayWidth= wrapperWidth > 0 ? wrapperWidth/daysNum : 0;
-    const calcFontSize = Math.max(8, calcDayWidth * 0.3);
+    const calcFontSize = Math.min(15, calcDayWidth * 0.3);
 
     return (
     <div className="mtl-wrapper" ref={wrapperRef} >
@@ -73,13 +73,13 @@ export function MonthTimeline({
                         {currDay === d  && currMonth === monthContext.getMonth() && currYear === monthContext.getFullYear()? (
                            <div
                             className="mtl-curr-day-content" 
-                            style={{height: calcDayWidth, width: calcDayWidth}}>
+                            style={{width: Math.min(35, calcDayWidth), height: Math.min(35, calcDayWidth)}}>
                             {String(d).padStart(2, "0")}/{String(monthContext.getMonth() + 1).padStart(2, "0")}        
                         </div> 
                         ) : (
                             <div
                             className="mtl-day-content" 
-                            style={{height: calcDayWidth, width: calcDayWidth}}>
+                            style={{width: Math.min(35, calcDayWidth), height: Math.min(35, calcDayWidth)}}>
                             {String(d).padStart(2, "0")}/{String(monthContext.getMonth() + 1).padStart(2, "0")}        
                         </div>
                         )}
@@ -102,7 +102,7 @@ export function MonthTimeline({
                         {events.filter(ev=> ev.start.getDate() === d && ev.start.getMonth() === monthContext.getMonth() && ev.start.getFullYear() === monthContext.getFullYear())
                         .map((ev)=>{
                             return(
-                            <div className="mtl-event" style={{width: ev.end.getDate() - ev.start.getDate() > 0 ? ((ev.end.getDate() - ev.start.getDate()) * calcDayWidth):(calcDayWidth), background: ev.color != null && ev.color != "" &&  ev.color!= undefined ? ev.color :randColor}}>
+                            <div className="mtl-event" style={{width: ev.end.getDate() - ev.start.getDate() > 0 ? ((ev.end.getDate() - ev.start.getDate()) * calcDayWidth):(calcDayWidth), background: ev.color ?? randColor}}>
                                 <span className="mtl-event-title" style={{fontSize: calcFontSize}}>{ev.title}</span>
                             </div>
                             );
