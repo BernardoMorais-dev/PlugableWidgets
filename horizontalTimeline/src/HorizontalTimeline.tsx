@@ -12,6 +12,13 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
         viewMode,
         meetingList,
         attrTitle,
+        attrMeetSource,
+        attrMeetStatus,
+        attrInternalNote,
+        attrMeetType,
+        attrClientName,
+        attrProductCategory,
+        attrProduct,
         attrStart,
         attrEnd,
         dateContext,
@@ -31,6 +38,13 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
         start: attrStart.get(item).value as Date,
         end: attrEnd.get(item).value as Date,
         color: attrColor ? (attrColor.get(item).value ?? undefined) : undefined,
+        attrMeetSource: attrMeetSource?.get(item).value ?? "",
+        attrMeetStatus: attrMeetStatus?.get(item).value ?? "",
+        attrInternalNote: attrInternalNote?.get(item).value ?? "",
+        attrMeetType: attrMeetType?.get(item).value ?? "",
+        attrClientName: attrClientName?.get(item).value ?? "",
+        attrProductCategory:attrProductCategory?.get(item).value ?? "",
+        attrProduct:attrProduct?.get(item).value ?? ""
     }));
 
     if (viewMode === "dayView") {
@@ -41,7 +55,6 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
                 startHour={startHour ?? 8}
                 endHour={endHour ?? 20}
                 rowHeight={rowHeight ?? 64}
-                
                 showNowLine={showNowLine ?? true}
                 onEventClick={
                     onEventClick
@@ -55,6 +68,9 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
             <MonthTimeline
                 monthContext={monthDate?? new Date()}
                 events={events}
+                onEventClick={
+                    onEventClick? (item: ObjectItem) => onEventClick.get(item).execute()
+                    : undefined}
             />
         );
 }

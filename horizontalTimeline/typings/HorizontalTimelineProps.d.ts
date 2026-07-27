@@ -17,6 +17,13 @@ export interface HorizontalTimelineContainerProps {
     dateContext?: DynamicValue<Date>;
     meetingList: ListValue;
     attrTitle: ListAttributeValue<string>;
+    attrMeetSource?: ListAttributeValue<string>;
+    attrMeetStatus?: ListAttributeValue<string>;
+    attrInternalNote?: ListAttributeValue<string>;
+    attrMeetType?: ListAttributeValue<string>;
+    attrClientName?: ListAttributeValue<string>;
+    attrProductCategory?: ListAttributeValue<string>;
+    attrProduct?: ListAttributeValue<string>;
     attrStart: ListAttributeValue<Date>;
     attrEnd: ListAttributeValue<Date>;
     attrColor?: ListAttributeValue<string>;
@@ -42,6 +49,13 @@ export interface HorizontalTimelinePreviewProps {
     dateContext: string;
     meetingList: {} | { caption: string } | { type: string } | null;
     attrTitle: string;
+    attrMeetSource: string;
+    attrMeetStatus: string;
+    attrInternalNote: string;
+    attrMeetType: string;
+    attrClientName: string;
+    attrProductCategory: string;
+    attrProduct: string;
     attrStart: string;
     attrEnd: string;
     attrColor: string;

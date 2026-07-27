@@ -36,6 +36,55 @@
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
+            <property key="attrMeetSource" type="attribute" dataSource="meetingList" required="false">
+                <caption>Event Source</caption>
+                <description>Event Source (To Show on Tooltip)</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="attrMeetStatus" type="attribute" dataSource="meetingList" required="false">
+                <caption>Event Status</caption>
+                <description>Event Status (To Show on Tooltip)</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="attrInternalNote" type="attribute" dataSource="meetingList" required="false">
+                <caption>Internal Note</caption>
+                <description>Internal Note (To Show on Tooltip)</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="attrMeetType" type="attribute" dataSource="meetingList" required="false">
+                <caption>Event Type</caption>
+                <description>Type of Evevent (To Show on Tooltip)</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="attrClientName" type="attribute" dataSource="meetingList" required="false">
+                <caption>Client Name</caption>
+                <description>Client Name (To Show on Tooltip)</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="attrProductCategory" type="attribute" dataSource="meetingList" required="false">
+                <caption>Product Category</caption>
+                <description>Product Category (To Show on Tooltip)</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="attrProduct" type="attribute" dataSource="meetingList" required="false">
+                <caption>Product Name</caption>
+                <description>Product Name (To Show on Tooltip)</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
             <property key="attrStart" type="attribute" dataSource="meetingList" required="true">
                 <caption>Start time</caption>
                 <description>DateTime — start of the event</description>
@@ -85,7 +134,5 @@
                 <description>Action triggered when the user clicks a meeting block</description>
             </property>
         </propertyGroup>
-
     </properties>
 </widget>
-

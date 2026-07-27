@@ -12,9 +12,19 @@ export interface MappedEvent{
 export interface HorizontalTimelimeProps{
     events: MappedEvent[];
     monthContext: Date;
+    onEventClick?: (item: ObjectItem) => void;
 }
 
 //-----Helper functions ----------------
+
+function calcEventsHeight(days: number[], events: MappedEvent[], ): number{
+    let height=0;
+    for (const d of days){
+        height = (events.filter(ev => ev.start.getDate() === d).length)* 30 > height ? 
+        (events.filter(ev => ev.start.getDate() === d).length)* 30 : height   
+    }
+    return height+10;
+}
 
 function daysInMonth(date:Date): number{
     const month = date.getMonth();
@@ -38,7 +48,8 @@ const randColor= getRandomColor();
 
 export function MonthTimeline({
     monthContext,
-    events
+    events,
+    onEventClick
 }:HorizontalTimelimeProps): ReactElement{
     const [wrapperWidth, setWrapperWidth] = useState(0);
     const daysNum = daysInMonth(monthContext); 
@@ -58,9 +69,9 @@ export function MonthTimeline({
         obs.observe(el);
         return() => obs.disconnect();
     }, []);
-
     const calcDayWidth= wrapperWidth > 0 ? wrapperWidth/daysNum : 0;
-    const calcFontSize = Math.min(15, calcDayWidth * 0.3);
+    const calcFontSize = Math.min(10, calcDayWidth * 0.3);
+    const eventsHeight= calcEventsHeight(dayArray, events.filter(ev => ev.start.getMonth() === monthContext.getMonth() && ev.start.getFullYear() === monthContext.getFullYear()));
 
     return (
     <div className="mtl-wrapper" ref={wrapperRef} >
@@ -89,27 +100,34 @@ export function MonthTimeline({
             ))
             }
         </div>
-        <div className="mtl-body" style= {{width:"100%"}}>
-            {dayArray.map(d=>(
+        
+        <div className="mtl-body" style= {{width:"100%", height: eventsHeight}}>
+            {dayArray.map(d=>{
+                return(
                 <div  
                     key={d}
                     className={d === currDay && currMonth === monthContext.getMonth() && currYear === monthContext.getFullYear()? "mtl-curr-day-event":"mtl-day-event"}
-                    style = {{ width:calcDayWidth}}>
-
-                        
+                    style = {{ height: eventsHeight, width:calcDayWidth}}>
+                    <div 
+                        className="event-layer" 
+                        style={{position: "relative"}}>
                         {/*<div className= "mtl-grid-line" style={{left: d * calcDayWidth}}/>*/}
 
                         {events.filter(ev=> ev.start.getDate() === d && ev.start.getMonth() === monthContext.getMonth() && ev.start.getFullYear() === monthContext.getFullYear())
-                        .map((ev)=>{
+                        .map((ev, index)=>{
                             return(
-                            <div className="mtl-event" style={{width: ev.end.getDate() - ev.start.getDate() > 0 ? ((ev.end.getDate() - ev.start.getDate()) * calcDayWidth):(calcDayWidth), background: ev.color ?? randColor}}>
+                            <div className="mtl-event" 
+                            key = {ev.item.id}
+                            style={{top: index * 30, position: "absolute", width: ev.end.getDate() - ev.start.getDate() > 0 ? ((ev.end.getDate() - ev.start.getDate()) * calcDayWidth):(calcDayWidth), background: ev.color ?? randColor}}
+                            onClick={() => onEventClick?.(ev.item)}>
                                 <span className="mtl-event-title" style={{fontSize: calcFontSize}}>{ev.title}</span>
                             </div>
                             );
-                        })}        
+                        })}  
+                    </div>      
                 </div>
-
-            ))}
+                );
+            })}
             
 
         </div>

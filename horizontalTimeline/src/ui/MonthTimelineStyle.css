@@ -5,7 +5,6 @@
     overflow-x: hidden;
     background: #eff6ff;
     font-family: Arial;
-    max-height: 50vh;
     max-width: 100%;
     box-sizing: border-box;
     min-width: 0;
@@ -19,7 +18,6 @@
     position: sticky;
     height: 30px;
     width:100%;
-    flex:1;
     top: 0;
     z-index:10;
     background-color: #eff6ff;
@@ -59,8 +57,6 @@
 /*Events Style*/
 
 .mtl-body{
-    margin-top: 6px;
-    padding: 5px 5px 5px 5px;
     display: flex;
     flex-direction: row;
 }

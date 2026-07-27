@@ -5,7 +5,6 @@
     overflow-x: hidden;
     background: #eff6ff;
     font-family: Arial;
-    max-height: 50vh;
     max-width: 100%;
     box-sizing: border-box;
     min-width: 0;
@@ -28,6 +27,7 @@
 .htl-header-ticks{
     display: flex;
     align-items: center;
+    border-inline: 1px solid;
     justify-content: center;
     padding: 10px 10px 10px 10px;
     z-index: 5;
@@ -44,6 +44,16 @@
     border-radius: 25px;
 }
 
+.htl-curr-hour-tick{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e40af;
+    font-weight: bold;
+    color: #fff;
+    padding: 5px 5px 5px 5px;
+    border-radius: 25px;
+}
 
 .htl-body {
     display: flex;
@@ -70,9 +80,20 @@
 .htl-event-layer {
     display:flex;
     flex-direction: column;
+    box-sizing: border-box;
     border-left: 1px solid #1e40af;
     border-right: 1px solid #1e40af;
 }
+
+.htl-curr-event-layer{
+    display:flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: #1e40af49;
+    border-left: 1px solid #eff6ff;
+    border-right: 1px solid #eff6ff;
+}
+
 
 /* Tooltip Styles */
 .htl-tooltip {
@@ -98,8 +119,7 @@
     justify-content: center;
     position: relative;
     text-wrap: wrap;
-    max-height: 50px;
-    top: 0;
+    height: 30px;
     padding: 5px 5px 5px 5px;
     padding-left: 10px;
     border-radius: 15px;
@@ -111,5 +131,6 @@
 
 .htl-event-title, .htl-event-time{
     font-weight: bold;
+    font-size: 10px;
 }
 /*------------------*/
