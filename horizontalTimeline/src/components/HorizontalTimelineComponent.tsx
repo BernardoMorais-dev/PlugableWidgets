@@ -144,37 +144,37 @@ function Tooltip({ state }: { state: TooltipState }): ReactElement | null {
             style={{ left: state.x + 12, top: state.y+ 12}}
             role="tooltip"
         >
-            {ev.title === null || ev.title === '' ? (<></>):(<div className="htl-tooltip-title">Title: {ev.title}</div>)}
-            {ev.attrMeetType === null || ev.attrMeetType === '' ? (<></>):(<div className="htl-tooltip-title">Type: {ev.attrMeetType}</div>)}
-            {ev.attrMeetSource === null || ev.attrMeetSource === '' ? (<></>):(<div className="htl-tooltip-title">Source: {ev.attrMeetSource}</div>)}
-            {ev.attrMeetStatus === null || ev.attrMeetStatus === '' ? (<></>):(<div className="htl-tooltip-title">Status: {ev.attrMeetStatus}</div>)}
+            {ev.title === null || ev.title === '' ? (<></>):(<div className="htl-tooltip-title">Název: {ev.title}</div>)}
+            {ev.attrMeetType === null || ev.attrMeetType === '' ? (<></>):(<div className="htl-tooltip-title">Typ: {ev.attrMeetType}</div>)}
+            {ev.attrMeetSource === null || ev.attrMeetSource === '' ? (<></>):(<div className="htl-tooltip-title">Zdroj: {ev.attrMeetSource}</div>)}
+            {ev.attrMeetStatus === null || ev.attrMeetStatus === '' ? (<></>):(<div className="htl-tooltip-title">Stav: {ev.attrMeetStatus}</div>)}
             <div className="htl-tooltip-row">
-                <span className="htl-tooltip-label">Hours: </span>
+                <span className="htl-tooltip-label">Hodiny: </span>
                 {fmt(ev.start)} – {fmt(ev.end)}
             </div>
             <div className="htl-tooltip-row">
-                <span className="htl-tooltip-label">Duration: </span>
+                <span className="htl-tooltip-label">Doba trvání: </span>
                 {durationLabel}
             </div>
 
             <div className="htl-tooltip-row">
                 {ev.attrClientName === null || ev.attrClientName === '' ? (<></>):(
-                    <span className="htl-tooltip-label">Client Name: {ev.attrClientName} </span>
+                    <span className="htl-tooltip-label">Jméno klienta: {ev.attrClientName} </span>
                 )}
                     
                 {ev.attrInternalNote === null || ev.attrInternalNote=== '' ? (<></>):(
-                    <span className="htl-tooltip-label">Note Internal:  {ev.attrInternalNote} </span>
+                    <span className="htl-tooltip-label">Interní poznámka:  {ev.attrInternalNote} </span>
                 )}
             </div>
             
             <div className="htl-tooltip-row">
                 {ev.attrProductCategory === null || ev.attrProductCategory=== '' ? (<></>):(
-                    <span className="htl-tooltip-label">Product Group: {ev.attrProductCategory}</span>
+                    <span className="htl-tooltip-label">Skupina produktů: {ev.attrProductCategory}</span>
                 )}
                 
                 
                 {ev.attrProduct === null || ev.attrProduct=== '' ? (<></>):(
-                    <span className="htl-tooltip-label">Product: {ev.attrProduct}</span>
+                    <span className="htl-tooltip-label">Produkt: {ev.attrProduct}</span>
                 )}
             </div>
             
@@ -282,7 +282,7 @@ export function HorizontalTimelineComponent({
                             )
                             
                             .map((ev, index) => {
-                                const width = getWidthPx(endHour, ev.start, ev.end, (calcHourWidth-6));
+                                const width = getWidthPx(endHour, ev.start, ev.end, (calcHourWidth-8));
                                 
 
                                 return (
