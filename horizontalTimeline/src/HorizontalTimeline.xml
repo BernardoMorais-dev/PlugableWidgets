@@ -14,7 +14,9 @@
                 <description>Render the widget to a daily view or a monthly view</description>
                 <enumerationValues>
                     <enumerationValue key="dayView"> Day View</enumerationValue>
+                    <enumerationValue key="weekView">Week View</enumerationValue>
                     <enumerationValue key="monthView"> Month View</enumerationValue>
+                    
                 </enumerationValues>
             </property>
 

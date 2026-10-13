@@ -196,6 +196,7 @@ export function HorizontalTimelineComponent({
     const totalHours = endHour - startHour;
      
     //Width Function Helper
+    const wrapperRef = useRef<HTMLDivElement>(null);
     const [wrapperWidth, setWrapperWidth] = useState(0);
     useEffect(()=> {
         const el = wrapperRef.current;
@@ -207,7 +208,7 @@ export function HorizontalTimelineComponent({
         return() => obs.disconnect();
     }, []);
 
-    const calcHourWidth= wrapperWidth > 0 ? wrapperWidth/(endHour-startHour) : 0;
+    const calcHourWidth= wrapperWidth > 0 ? wrapperWidth/(totalHours+1) : 0;
     const calcFontSize = Math.min(10, calcHourWidth * 0.3);
     
 
@@ -218,7 +219,7 @@ export function HorizontalTimelineComponent({
         event: null,
     });
 
-    const wrapperRef = useRef<HTMLDivElement>(null);
+
 
     // Build hour ticks array
     const hourTicks = Array.from({ length: totalHours + 1 }, (_, i) => startHour + i);

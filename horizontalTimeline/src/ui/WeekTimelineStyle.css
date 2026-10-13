@@ -1,0 +1,11 @@
+.week-day-container{
+
+}
+.week-day-calendar{
+    .htl-header{
+        display: none;
+    }
+    .htl-event-layer, .htl-curr-event-layer{
+        min-height: 50px !important;
+    }
+}

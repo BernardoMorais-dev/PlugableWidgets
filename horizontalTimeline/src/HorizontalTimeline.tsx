@@ -2,9 +2,11 @@ import { ReactElement } from "react";
 import { ObjectItem } from "mendix";
 import { HorizontalTimelineComponent, MappedEvent } from "./components/HorizontalTimelineComponent";
 import { MonthTimeline } from "./components/MonthTimelineComponent";
+import { WeekTimelineComponent } from "./components/WeekTimelineComponent";
 import { HorizontalTimelineContainerProps } from "../typings/HorizontalTimelineProps";
 import "./ui/HorizontalTimelineStyle.css";
 import "./ui/MonthTimelineStyle.css";
+import "./ui/WeekTimelineStyle.css";
 
 
 export function HorizontalTimeline(props: HorizontalTimelineContainerProps): ReactElement {
@@ -50,6 +52,23 @@ export function HorizontalTimeline(props: HorizontalTimelineContainerProps): Rea
     if (viewMode === "dayView") {
         return (
             <HorizontalTimelineComponent
+                events={events}
+                dateContext={dateContext?.value ??new Date()}
+                startHour={startHour ?? 8}
+                endHour={endHour ?? 20}
+                rowHeight={rowHeight ?? 64}
+                showNowLine={showNowLine ?? true}
+                onEventClick={
+                    onEventClick
+                        ? (item: ObjectItem) => onEventClick.get(item).execute()
+                        : undefined
+                }
+            />
+        );
+    } else 
+    if (viewMode === "weekView") {
+        return (
+            <WeekTimelineComponent
                 events={events}
                 dateContext={dateContext?.value ??new Date()}
                 startHour={startHour ?? 8}

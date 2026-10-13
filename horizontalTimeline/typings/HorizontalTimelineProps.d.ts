@@ -6,7 +6,7 @@
 import { CSSProperties } from "react";
 import { DynamicValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
 
-export type ViewModeEnum = "dayView" | "monthView";
+export type ViewModeEnum = "dayView" | "weekView" | "monthView";
 
 export interface HorizontalTimelineContainerProps {
     name: string;
